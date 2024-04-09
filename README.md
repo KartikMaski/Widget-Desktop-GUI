@@ -13,3 +13,6 @@ Introducing **System Enhancer**: the ultimate Python toolkit for optimizing your
 - Simplify your workflow with a one-click app closure feature.
 
 Elevate your productivity and entertainment with System Enhancer – your all-in-one solution for maximizing your system's potential.
+
+
+![Screenshot 2024-04-09 180439](https://github.com/KartikMaski/Widget-Desktop-GUI/assets/113284539/de16f5b6-2f18-467a-ac78-126c5d46b346)
