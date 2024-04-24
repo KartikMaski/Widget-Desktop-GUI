@@ -1,5 +1,5 @@
 # Widget-Desktop-GUI
-Introducing **System Enhancer**: the ultimate Python toolkit for optimizing your computing experience. From system insights to power management, weather updates, and entertainment features like an in-built Ludo game, this toolkit has it all. 
+Introducing **System Enhancer**: the ultimate Python toolkit for optimizing your computing experience. From system insights to power management, system updates, and entertainment features like an in-built game, this toolkit has it all. 
 
 - Gain valuable insights into your system configuration, including PC name, window, processor, RAM, and more.
 - Monitor battery percentage, charging status, and remaining time with real-time updates.
@@ -7,7 +7,7 @@ Introducing **System Enhancer**: the ultimate Python toolkit for optimizing your
 - Quick easy calculator for convenience at finger-tips.
 - Access a built-in clock and calendar for added convenience.
 - Seamlessly switch between dark and light modes to suit your preferences.
-- Enjoy entertainment with an integrated Ludo game for some leisure time.
+- Enjoy entertainment with an integrated ping-pong game for some leisure time.
 - Capture screenshots with ease using the toolkit's functionality.
 - Open Explorer, Google, or any desired link directly within the toolkit.
 - Simplify your workflow with a one-click app closure feature.
