@@ -1,4 +1,9 @@
+import time
 from tkinter import *
+from tkinter import END
+from tkinter import Toplevel
+from tkinter import PhotoImage
+from tkinter import Canvas
 from PIL import Image, ImageTk
 from tkinter import ttk
 from tkinter import ttk,messagebox
@@ -52,9 +57,9 @@ LHS=Frame(Body,width=600,height=835,bg="#f4f5f5",highlightbackground="#abacb1",h
 LHS.place(x=10,y=10)
 
 # logo
-photo=PhotoImage(file="Image/laptop_lg.png").zoom(1)
+photo=PhotoImage(file="Image/laptop_lg.png")
 myimage=Label(LHS,image=photo,background="#f4f5f5")
-myimage.place(x=14,y=20)
+myimage.place(x=0,y=20)
 
 my_system= platform.uname()
 
@@ -95,6 +100,7 @@ def convertTime(seconds):
     hours,minutes=divmod(minutes,60)
     return "%d:%02d:%02d"% (hours,minutes,seconds)
 
+battery_label = None
 def none():
     global battery_png
     global battery_label
@@ -106,8 +112,11 @@ def none():
     lbl_plug.config(text=f'Plug in:{str(battery.power_plugged)}')
     lbl_time.config(text=f'{time} remaining')
 
-    battery_label=Label(RHS,background="#f4f5f5")
-    battery_label.place(x=15,y=80)
+    if not battery_label:
+        battery_label=Label(RHS,background="#f4f5f5")
+        battery_label.place(x=15,y=80)
+
+    battery_label.config(text='')
 
     lbl.after(1000,none)
 
@@ -188,6 +197,7 @@ brightness.set(70)
 
 
 def calculator():
+    # f1=Frame(root)
     root = Tk()
     root.title("Simple Calculator")
     root.geometry("600x835")
@@ -252,6 +262,7 @@ def calculator():
     def on_back():
         root.deiconify()  # Show the main window
         calculator_window.withdraw()
+    
     # Define Buttons
 
     button_1 = Button(root, text="1", padx=55, pady=30, command=lambda: button_click(1), bg="#344955", fg="white")
@@ -376,16 +387,30 @@ button_mode=True
 def mode():
     global button_mode
     if button_mode:
+        # Change LHS frame configuration
         LHS.config(bg="#292e2e")
         myimage.config(bg="#292e2e")
-        l1.config(bg="#292e2e",fg="#d6d6d6")
-        l2.config(bg="#292e2e",fg="#d6d6d6")
-        l3.config(bg="#292e2e",fg="#d6d6d6")
-        l4.config(bg="#292e2e",fg="#d6d6d6")
-        l5.config(bg="#292e2e",fg="#d6d6d6")
-        l6.config(bg="#292e2e",fg="#d6d6d6")
+        l1.config(bg="#292e2e", fg="#d6d6d6")
+        l2.config(bg="#292e2e", fg="#d6d6d6")
+        l3.config(bg="#292e2e", fg="#d6d6d6")
+        l4.config(bg="#292e2e", fg="#d6d6d6")
+        l5.config(bg="#292e2e", fg="#d6d6d6")
+        l6.config(bg="#292e2e", fg="#d6d6d6")
 
+        # Change RHS frame configuration
+        RHS.config(bg="#292e2e")
+        # Change the background color of labels in the RHS frame
+        lbl_speaker.config(bg="#292e2e", fg="#d6d6d6")
+        lbl_brightness.config(bg="#292e2e", fg="#d6d6d6")
+        lbl_plug.config(bg="#292e2e", fg="#d6d6d6")
+        system.config(bg="#292e2e", fg="#d6d6d6")
+        lbl_time.config(bg="#292e2e", fg="#d6d6d6")
+        lbl.config(bg="#292e2e", fg="#d6d6d6")
+        battery_label.config(bg="#292e2e", fg="#d6d6d6")
+
+        # Change RHB frame configuration
         RHB.config(bg="#292e2e")
+        # Change the background color of buttons in the RHB frame
         app1.config(bg="#292e2e")
         app2.config(bg="#292e2e")
         app3.config(bg="#292e2e")
@@ -396,21 +421,41 @@ def mode():
         app8.config(bg="#292e2e")
         app9.config(bg="#292e2e")
         app10.config(bg="#292e2e")
-        apps.config(bg="#292e2e",fg="#d6d6d6")
+        apps.config(bg="#292e2e", fg="#d6d6d6")
 
-        button_mode=False
-    
+        # Change the background color of the parent widget/frame of volume
+        volume.master.config(bg="#292e2e")
+
+        # Change the battery icon color
+        battery_label.config(bg="#292e2e", fg="#d6d6d6")
+
+        # Update button_mode
+        button_mode = False
     else:
+        # Change LHS frame configuration
         LHS.config(bg="#f4f5f5")
         myimage.config(bg="#f4f5f5")
-        l1.config(bg="#f4f5f5",fg="#292e2e")
-        l2.config(bg="#f4f5f5",fg="#292e2e")
-        l3.config(bg="#f4f5f5",fg="#292e2e")
-        l4.config(bg="#f4f5f5",fg="#292e2e")
-        l5.config(bg="#f4f5f5",fg="#292e2e")
-        l6.config(bg="#f4f5f5",fg="#292e2e")
+        l1.config(bg="#f4f5f5", fg="#292e2e")
+        l2.config(bg="#f4f5f5", fg="#292e2e")
+        l3.config(bg="#f4f5f5", fg="#292e2e")
+        l4.config(bg="#f4f5f5", fg="#292e2e")
+        l5.config(bg="#f4f5f5", fg="#292e2e")
+        l6.config(bg="#f4f5f5", fg="#292e2e")
 
+        # Change RHS frame configuration
+        RHS.config(bg="#f4f5f5")
+        # Change the background color of labels in the RHS frame
+        system.config(bg="#f4f5f5", fg="#292e2e")
+        lbl_speaker.config(bg="#f4f5f5", fg="#292e2e")
+        lbl_plug.config(bg="#f4f5f5", fg="#292e2e")
+        lbl_brightness.config(bg="#f4f5f5", fg="#292e2e")
+        lbl_time.config(bg="#f4f5f5", fg="#292e2e")
+        lbl.config(bg="#f4f5f5", fg="#292e2e")
+        battery_label.config(bg="#f4f5f5", fg="#292e2e")
+
+        # Change RHB frame configuration
         RHB.config(bg="#f4f5f5")
+        # Change the background color of buttons in the RHB frame
         app1.config(bg="#f4f5f5")
         app2.config(bg="#f4f5f5")
         app3.config(bg="#f4f5f5")
@@ -421,75 +466,161 @@ def mode():
         app8.config(bg="#f4f5f5")
         app9.config(bg="#f4f5f5")
         app10.config(bg="#f4f5f5")
-        apps.config(bg="#f4f5f5",fg="#292e2e")
+        apps.config(bg="#f4f5f5", fg="#292e2e")
+
+        # Change the background color of the parent widget/frame of volume
+        volume.master.config(bg="#f4f5f5")
+
+        # Change the battery icon color
+        battery_label.config(bg="#f4f5f5", fg="#292e2e")
+
+        # Update button_mode
+        button_mode = True
 
 
-        button_mode=True
-        
 
 
 def game():
-    def on_back():
-        root.deiconify()  # Show the main window
-        game_window.withdraw()  # Hide the game window
+    global canvas  # Make canvas global
+    app5 = Tk()
+    app5.title("Pong Game")
+    app5.geometry("1000x800")
+    app5.resizable(0, 0)
+    app5.wm_attributes("-topmost", 1)
+    canvas = Canvas(app5, width=1000, height=800, bd=1, highlightthickness=1) 
+    canvas.config(bg="black")
+    canvas.pack()
+    l = canvas.create_text(500, 20, font=("Arial", 23, "bold"), text=" : ", fill="white")
+    app5.update()
+    canvas.create_line(500, 0, 500, 1000, fill="white")
 
-    # Create a Toplevel window for the Ludo game
-    app5 = Toplevel()
-    app5.geometry("600x835+1170+170")
-    app5.title('Ludo')
-    app5.configure(bg="#dee2e5")
-    app5.resizable(False, False)
+    class Ball:
+        def update(self):
+            l.configure(text=str(self.score1) + ' : ' + str(self.score2))
 
-    # Set icon for the game window
-    image_icon = PhotoImage(file='Image/App5.png')
-    app5.iconphoto(False, image_icon)
+        def __init__(self, canvas, paddle1, paddle2, color):
+            self.paddle1 = paddle1
+            self.paddle2 = paddle2
+            self.canvas = canvas
+            self.id = canvas.create_oval(20, 20, 50, 50, fill=color)
+            self.canvas.move(self.id, 283, 300)
+            starts = [-3, -2, -1, 1, 2, 3]
+            random.shuffle(starts)
+            self.x = starts[1]
+            self.y = starts[2]
+            self.canvas_height = self.canvas.winfo_height()
+            self.canvas_width = self.canvas.winfo_width()
+            self.score1 = 0
+            self.score2 = 0
 
-    # Background image for the Ludo game
-    ludo_image = PhotoImage(file="Image/ludo back.png")
-    Label(app5, image=ludo_image).pack()
+        def draw(self):
+            self.canvas.move(self.id, self.x, self.y)
+            pos = self.canvas.coords(self.id)
+            if pos[1] <= 0:
+                self.y = 4
+            if pos[3] >= self.canvas_height:
+                self.y = -4
+            if pos[0] <= 0:
+                self.x = 4
+                self.score1 += 1
+                print(self.score1)
+                canvas.itemconfigure(l, text=str(self.score1) + " : " + str(self.score2))
+            if pos[2] >= self.canvas_width:
+                self.x = -4
+                self.score2 += 1
+                print(self.score2)
+                canvas.itemconfigure(l, text=str(self.score1) + " : " + str(self.score2))
+            if self.hit_paddle1(pos) == True:
+                self.x = 4
+            if self.hit_paddle2(pos) == True:
+                self.x = -4
 
-    # Label for displaying dice rolls
-    label_dice = Label(app5, text='', font=("times", 80))
-    label_dice.pack(pady=10)
+        def hit_paddle1(self, pos):
+            paddle_pos = self.canvas.coords(self.paddle1.id)
+            if pos[1] >= paddle_pos[1] and pos[1] <= paddle_pos[3]:
+                if pos[0] >= paddle_pos[0] and pos[0] <= paddle_pos[2]:
+                    return True
+                return False
 
-    # Label for displaying points earned
-    label_points = Label(app5, text='Points: 0', font=("times", 16))
-    label_points.pack()
+        def hit_paddle2(self, pos):
+            paddle_pos = self.canvas.coords(self.paddle2.id)
+            if pos[1] >= paddle_pos[1] and pos[1] <= paddle_pos[3]:
+                if pos[2] >= paddle_pos[0] and pos[2] <= paddle_pos[2]:
+                    return True
+                return False
 
-    # Variable to store points earned
-    points_earned = 0
+    class Paddle1:
+        pos = [0, 0, 0, 0]
 
-    # Function to simulate rolling the dice
-    def roll():
-        nonlocal points_earned
-        dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
-        roll_result = f'{random.choice(dice)}{random.choice(dice)}'
-        label_dice.configure(text=roll_result, fg="#29232e")
+        def __init__(self, canvas, color):
+            self.canvas = canvas
+            self.id = canvas.create_rectangle(10, 150, 45, 350, fill=color)
+            self.y = 0
+            self.canvas_height = self.canvas.winfo_height()
+            self.canvas_width = self.canvas.winfo_width()
+            self.canvas.bind_all('a', self.turn_left)
+            self.canvas.bind_all('d', self.turn_right)
 
-        # Extract numbers from the roll result
-        numbers = [int(char) for char in roll_result if char.isdigit()]
+        def draw(self):
+            self.canvas.move(self.id, 0, self.y)
+            pos = self.canvas.coords(self.id)
+            if pos[1] <= 0:
+                self.y = 0
+            if pos[3] >= self.canvas_height:
+                self.y = 0
 
-        # Check if both dice show the same number
-        if len(numbers) == 2 and numbers[0] == numbers[1]:
-            messagebox.showinfo("Game Over", "Same number on both dice. Restarting points!")
-            points_earned = 0
-            label_points.config(text='Points: 0')
-        else:
-            # Increment points earned if no same numbers on both dice
-            points_earned += 1
-            label_points.config(text=f'Points: {points_earned}')
+        def turn_left(self, event):
+            self.y = -4
 
-    # Button to roll the dice
-    btn_image = PhotoImage(file="Image/ludo button.png")
-    btn = Button(app5, image=btn_image, bg="#dee2e5", command=roll)
-    btn.pack(pady=10, padx=10)
+        def turn_right(self, event):
+            self.y = 4
 
-    button_back = Button(app5, text="Back", command=on_back, bg="#344955", fg="white")
-    button_back.pack(pady=2, padx=10)
+    class Paddle2:
+        pos = [0, 0, 0, 0]
 
-    game_window = app5  # Assigning the app5 window to the game window for clarity
+        def __init__(self, canvas, color):
+            self.canvas = canvas
+            self.id = canvas.create_rectangle(950, 150, 985, 350, fill=color)
+            self.y = 0
+            self.canvas_height = self.canvas.winfo_height()
+            self.canvas.bind_all("<KeyPress-Left>", self.turn_left)
+            self.canvas.bind_all("<KeyPress-Right>", self.turn_right)
+
+        def draw(self):
+            self.canvas.move(self.id, 0, self.y)
+            pos = self.canvas.coords(self.id)
+            if pos[1] <= 0:
+                self.y = 0
+            if pos[3] >= self.canvas_height:
+                self.y = 0
+
+        def turn_left(self, event):
+            self.y = 4
+
+        def turn_right(self, event):
+            self.y = -4
+
+    middle_circle = canvas.create_oval(10, 10, 150, 150, outline="white")
+    canvas.move(middle_circle, 420,300)
+
+    paddle1 = Paddle1(canvas, "orange")
+    paddle2 = Paddle2(canvas, "lightgreen")
+    ball = Ball(canvas, paddle1, paddle2, "yellow")
+
+    while True:
+        if ball.score1 == 10 or ball.score2 == 10:
+            messagebox.showinfo("Game Over", "Player 1 =" + str(ball.score1) + " Player 2 =" + str(ball.score2))
+            break
+        ball.draw()
+        paddle1.draw()
+        paddle2.draw()
+        app5.update_idletasks()
+        app5.update()
+        time.sleep(0.01)
 
     app5.mainloop()
+
+
 
 #######################
     
@@ -503,7 +634,6 @@ def file():
     subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
 
 def crome():
-    # Open website 
     webview.create_window('Google.com', 'https://www.google.com/', width=775, height=520) 
     webview.start()
 
