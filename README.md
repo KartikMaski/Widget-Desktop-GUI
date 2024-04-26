@@ -1,4 +1,4 @@
-# Widget-Desktop-GUI
+# Widget_Desktop_GUI
 Introducing **System Enhancer**: the ultimate Python toolkit for optimizing your computing experience. From system insights to power management, system updates, and entertainment features like an in-built game, this toolkit has it all. 
 
 - Gain valuable insights into your system configuration, including PC name, window, processor, RAM, and more.
